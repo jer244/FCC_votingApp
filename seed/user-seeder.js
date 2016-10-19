@@ -1,25 +1,27 @@
 var User = require('../models/user');
 
+require('dotenv').config();  //comment out for production
+
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://test:test@ds035846.mlab.com:35846/hurley_fcc_votingapp_users');
+mongoose.connect('mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST);
 
 var users = [
       new User({
-        username: 'Jeremy',
-        password: 'jeremyiam'
+        username: 'one',
+        password: 'oneiam'
       }),
       new User({
-        username: 'Carrie',
-        password: 'carrieiam'
+        username: 'two',
+        password: 'twoiam'
       }),
       new User({
-        username: 'George',
-        password: 'georgeiam'
+        username: 'three',
+        password: 'threeiam'
       }),
       new User({
-        username: 'Will',
-        password: 'william'
+        username: 'four',
+        password: 'fouriam'
       })
 ];
 

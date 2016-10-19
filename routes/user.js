@@ -30,14 +30,14 @@ router.post('/signup', passport.authenticate('local.signup', {
   failureFlash: true
 }));
 
-router.get('/signin', function(req, res, next) {
+router.get('/logIn', function(req, res, next) {
   var messages = req.flash('error');
-  res.render('user/signin', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
+  res.render('user/logIn', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
 });
 
-router.post('/signin', passport.authenticate('local.signin', {
+router.post('/logIn', passport.authenticate('local.logIn', {
   successRedirect: '/',
-  failureRedirect: '/user/signin',
+  failureRedirect: '/user/logIn',
   failureFlash: true
 }));
 
@@ -47,7 +47,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/');
+  res.redirect('/user/logIn');
 }
 
 function notLoggedIn(req, res, next) {

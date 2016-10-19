@@ -1,8 +1,5 @@
 //https://www.youtube.com/watch?v=XVYApTfR6XE ~5min
-//need to
-    //control what is seen when either logged in or not
-    //add log out button when logged in
-    //change signin to login
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -56,6 +53,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next){
+  res.locals.login = req.isAuthenticated();
+  next();
+});
 
 app.use('/user', userRoutes);
 app.use('/', routes);

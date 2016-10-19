@@ -1,5 +1,9 @@
 <ul>
   <li class = 'floatLeft'><a href='/'>Home</a></li>
-  <li><a href='/user/signin'>Login</a></li>
-  <li><a href='/user/signup'>Sign Up</a></li>
+    <% if (!login) {%>
+      <li><a href='/user/logIn'>Log In</a></li>
+      <li><a href='/user/signup'>Sign Up</a></li>
+    <% } else { %>
+      <li><a href='/user/logout'>Log Out</a></li>
+    <% } %>
 </ul>
