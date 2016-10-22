@@ -1,4 +1,4 @@
-//https://www.youtube.com/watch?v=XVYApTfR6XE ~5min
+//https://www.youtube.com/watch?v=XVYApTfR6XE ~10min
 
 var express = require('express');
 var path = require('path');
@@ -18,6 +18,8 @@ require('dotenv').config();  //comment out for production
 
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
+var pollRoutes = require('./routes/poll');
+
 
 var app = express();
 
@@ -40,8 +42,7 @@ require('./config/passport');
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -60,6 +61,7 @@ app.use(function(req, res, next){
 });
 
 app.use('/user', userRoutes);
+app.use('/poll', pollRoutes);
 app.use('/', routes);
 
 // catch 404 and forward to error handler
@@ -93,11 +95,11 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.set( 'port', ( process.env.PORT || 3000 ));
+/*app.set( 'port', ( process.env.PORT || 3000 ));
 // Start node server
 app.listen( app.get( 'port' ), function() {
   console.log( 'Node server is running on port ' + app.get( 'port' ));
   });
-
+*/
 
 module.exports = app;
