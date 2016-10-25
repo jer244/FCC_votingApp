@@ -17,7 +17,7 @@ router.get('/logout', isLoggedIn, function(req, res, next){
 
 router.use('/', notLoggedIn, function(req, res, next){
   next();
-})
+});
 
 router.get('/signup', function(req, res, next){
   var messages = req.flash('error');

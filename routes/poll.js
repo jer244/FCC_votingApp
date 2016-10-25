@@ -6,7 +6,7 @@ var passport = require('passport');
 var csrfProtection = csrf();
 router.use(csrfProtection);
 
-router.get('/', isLoggedIn, function(req, res, next){
+router.get('/', function(req, res, next){
   res.render('./poll/poll');
 });
 

@@ -6,7 +6,19 @@ ul {
   background-color: #333;
 }
 
-li {
+ul.pollList {
+  list-style-type: none;
+  overflow:hidden;
+  background-color: white;
+  width: 60%;
+  margin: auto;
+  padding:3px;
+  text-align: center;
+}
+
+
+
+li.floatRight {
   float: right;
 }
 
@@ -23,6 +35,28 @@ li a {
   width: 80px;
 }
 
+li.pollListItem a{
+  display:block;
+  color: white;
+  text-align: center;
+  background-color: #333;
+  width: 90%;
+  margin: 3px;
+  padding: 0.5em;
+}
+
 li a:hover {
   background-color: #111;
+}
+
+.title{
+  font-size: 400%;
+  color: #333;
+  text-align: center;
+}
+
+.tagline{
+  font-size: 200%;
+  color: #333;
+  text-align: center;
 }
