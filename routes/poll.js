@@ -2,12 +2,18 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var passport = require('passport');
+var url = require('url');
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
 
 router.get('/', function(req, res, next){
-  res.render('./poll/poll');
+  if(req.query.id){
+    console.log(req.query.id);
+    res.send(req.query.id);
+  }else{
+  res.redirect('/');
+};
 });
 
 

@@ -10,7 +10,7 @@
     <p class='tagline'>Welcome to <%= title %></p>
       <ul class='pollList'>
         <% for(var i=0; i<polls.length; i++) {%>
-        	<li class='pollListItem'><a href='poll?title=<%= polls[i].pollTitle%>'><%= polls[i].creatorID %></a></li>
+        	<li class='pollListItem'><a href='poll?id=<%= polls[i]._id%>'><%= polls[i].pollTitle %></a></li>
         <% } %>
       </ul>
     <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
