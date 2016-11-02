@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var dataArray = [
+          ['Vote Title', 'Number of Votes']
+        ];
+
+
+        console.log('<%=poll._id%>');
+
+        <% poll.pollOptions.forEach(function(element){ %>
+          dataArray.push(['<%=element.optionTitle%>', <%=element.votes%>]);
+        <%});%>
+
+        console.log(dataArray);
+
+        var data = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+          title: '<%= poll.pollTitle %>',
+          pieHole: 0.5
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+</head>
+
+<body>
+    <% include ../partials/navbar.ejs %>
+        <h1><%= poll._id %></h1>
+        <div id="donutchart" style="width: 90%"></div>
+
+</body>
+
+</html>
