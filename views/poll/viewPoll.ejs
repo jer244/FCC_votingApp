@@ -4,44 +4,63 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
 
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
 
-      function drawChart() {
+            var dataArray = [
+                ['Vote Title', 'Number of Votes']
+            ];
 
-        var dataArray = [
-          ['Vote Title', 'Number of Votes']
-        ];
+            console.log('<%=poll._id%>');
 
+            <% poll.pollOptions.forEach(function(element){ %>
+            dataArray.push(['<%=element.optionTitle%>', <%=element.votes%>]);
+            <%});%>
 
-        console.log('<%=poll._id%>');
+            console.log(dataArray);
 
-        <% poll.pollOptions.forEach(function(element){ %>
-          dataArray.push(['<%=element.optionTitle%>', <%=element.votes%>]);
-        <%});%>
+            var data = google.visualization.arrayToDataTable(dataArray);
 
-        console.log(dataArray);
+            var options = {
+                //title: none,
+                colors: ['ffc199', '#ffa366', '#ff8432', '#ff6600', '#cc5100', '#993d00', '#662800', '#331400'],
+                is3D: false
+            };
 
-        var data = google.visualization.arrayToDataTable(dataArray);
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-        var options = {
-          title: '<%= poll.pollTitle %>',
-          pieHole: 0.5
-        };
+            chart.draw(data, options);
+        }
 
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-
-        chart.draw(data, options);
-      }
+        window.onresize = drawChart;
     </script>
 
 </head>
 
 <body>
     <% include ../partials/navbar.ejs %>
-        <h1><%= poll._id %></h1>
-        <div id="donutchart" style="width: 90%"></div>
+        <div style='text-align: center'>
+            <h1 style='margin: auto; margin-top: 10%'><%= poll.pollTitle %></h1>
+            <div id="piechart" style="width: 60%; height: 60%; margin: auto"></div>
+            <ul class='pollList'>
+              <% for(var i=0; i<poll.pollOptions.length; i++) {%>
+                  <li class='pollListItem'><a href='poll/vote?id=<%= poll._id%>&entry=<%= poll.pollOptions[i].optionTitle %>'><%= poll.pollOptions[i].optionTitle %></a></li>
+              <% } %>
+              <% if (login) {%>
+                <div id='writeInForm'>
+                  <form action='/poll/vote' method = 'post'>
+                    <input type='hidden' name='_csrf' value='<%=csrfToken%>'/>
+                    <input type='hidden' name='id' value='<%= poll._id%>'/>
+                    <input type='text' id='writeIn' name='writeIn' placeholder='Write in your own answer here'/>
+                    <input type='submit' value='Create Answer'/>
+                  </form>
+                </div>
+              <% } %>
+            </ul>
+
+        </div>
 
 </body>
 
