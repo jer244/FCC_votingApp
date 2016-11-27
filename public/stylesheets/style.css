@@ -1,9 +1,27 @@
+/* TODO: update CSS
+          create image for logo (use gimp to create 3d logo)
+          add orange highlights - bottom border of navbar, etc
+          fix spacing for list on managePollList
+*/
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow:hidden;
   background-color: #333;
+}
+
+.createPollButton a{
+  width: 40%;
+  display: block;
+  margin: auto;
+  margin-bottom: 2em;
+  color: white;
+  background-color: #333;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 ul.pollList {
@@ -16,6 +34,49 @@ ul.pollList {
   text-align: center;
 }
 
+
+ul.managePollList {
+  list-style-type: none;
+  overflow:hidden;
+  background-color: white;
+  width: 70%;
+  margin: auto;
+  padding:3px;
+  text-align: center;
+}
+
+li.managePollListItem a{
+  display:inline;
+  float: left;
+  color: white;
+  text-align: center;
+  background-color: #333;
+  width: 70%;
+  margin: 3px;
+  padding: 0.5em;
+}
+
+li.deletePollButton a{
+  display:inline;
+  float: left;
+  color: white;
+  text-align: center;
+  background-color: #333;
+  width: 5%;
+  margin: 3px;
+  padding: 0.5em;
+}
+
+li.tweetPollButton a{
+  display:inline;
+  float: left;
+  color: white;
+  text-align: center;
+  background-color: #333;
+  width: 5%;
+  margin: 3px;
+  padding: 0.5em;
+}
 
 
 li.floatRight {
@@ -45,9 +106,10 @@ li.pollListItem a{
   padding: 0.5em;
 }
 
-li a:hover {
+li a:hover, a:hover {
   background-color: #111;
 }
+
 
 .title{
   font-size: 400%;

@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <% include ../partials/navbar.ejs %>
+        <div style='text-align: center'>
+            <h1 style='margin: auto; margin-top: 10%'>Create Poll</h1>
+              <% if (login) {%>
+              <% if (alert){%>
+                <p><%= alert %></p>
+                <% } %>
+                <div id='createPollForm'>
+                  <form action='/poll/create' method = 'post'>
+                    <input type='hidden' name='_csrf' value='<%=csrfToken%>'/>
+                    <input type='text' id='pollTitle' name='pollTitle' placeholder='Poll Question'/>
+                    <input type='text' id='pollOptions' name='pollOptions' placeholder='seperate by ;'/>
+                    <input type='submit' value='Create Poll'/>
+                  </form>
+                </div>
+              <% } %>
+</body>
+
+</html>

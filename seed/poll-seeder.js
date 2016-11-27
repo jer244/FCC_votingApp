@@ -25,8 +25,8 @@ var poll = [
         }]
       }),
       new Poll({
-        creatorID: 'aMan',
-        pollTitle: 'title A',
+        creatorID: 'bMan',
+        pollTitle: 'title B',
         userID: ['aMan', 'bMan', 'cMan'],  //store users that already voted
         pollOptions: [{
           optionTitle: 'optionA',

@@ -5,9 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <!--TODO: create way to create new poll-->
     <% include ./partials/navbar.ejs %>
     <h1 class='title'><%= title %></h1>
     <p class='tagline'>Welcome to <%= title %></p>
+    <% if (login) {%>
+      <div class='createPollButton'><a href='poll/create'>Create Poll</a></div>
+    <% } %>
+
       <ul class='pollList'>
         <% for(var i=0; i<polls.length; i++) {%>
         	<li class='pollListItem'><a href='poll?id=<%= polls[i]._id%>'><%= polls[i].pollTitle %></a></li>
