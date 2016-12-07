@@ -1,9 +1,19 @@
+html{
+  height: 100%;
+}
 
-html, body{
+body{
   font-family: 'Ubuntu', sans-serif;
+  color: #333;
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content{
+  flex: 1;
 }
 
 ul {
@@ -34,7 +44,7 @@ p{
 }
 
 .navBarUl{
-  height: 3.5em;
+  height: 4em;
   margin: 0;
   border-bottom: 2px solid #cc5100;
 }
@@ -52,8 +62,8 @@ p{
   width: 20%;
   display: block;
   margin: auto;
-  margin-bottom: 2em;
-  margin-top: 2em;
+  margin-bottom: 3em;
+  margin-top: 3em;
   color: white;
   background-color: #cc5100;
   text-align: center;
@@ -63,12 +73,12 @@ p{
 }
 
 ul.pollList {
-  list-style-type: none;
-  overflow:hidden;
+  list-style: none;
+  overflow: hidden;
   background-color: white;
   width: 60%;
   margin: auto;
-  padding:3px;
+  padding-top:3px;
   text-align: center;
 }
 
@@ -81,12 +91,15 @@ ul.pollList {
   height: 100%;
 }
 
+.formTitle{
+  margin-bottom: 0.5em;
+}
 
 ul.managePollList {
   list-style-type: none;
   overflow:hidden;
   background-color: white;
-  width: 70%;
+  width: 60%;
   margin: auto;
   padding:3px;
   text-align: center;
@@ -98,8 +111,9 @@ li.managePollListItem a{
   color: white;
   text-align: center;
   background-color: #333;
-  width: 70%;
-  margin: 3px;
+  width: 85%;
+  margin: auto;
+  margin-top: 3px;
   padding: 0.5em;
   border-radius: 5px;
   text-decoration: none;
@@ -148,7 +162,8 @@ li.pollListItem a{
   text-align: center;
   background-color: #333;
   width: 90%;
-  margin: 3px;
+  margin:auto;
+  margin-top: 4px;
   padding: 0.5em;
   border-radius: 5px;
   height:auto;
@@ -177,16 +192,27 @@ li a:hover, a:hover {
   margin-top: 0.5em;
 }
 
+p a{
+  color:#cc5100;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+p a:hover{
+  color: #A34100;
+  background-color: white;
+}
+
 footer{
   color:#cc5100;
   text-align: center;
   background-color: #333;
   width: 100%;
   margin: 0;
-  padding: 3px;
-  height:auto;
+  margin-top: 5em;
+  padding: 1em;
+  height: 3em;
   text-decoration: none;
   border-top: 2px solid #cc5100;
-  position: fixed;
-  bottom: 0;
+  font-size: 0.8em;
 }

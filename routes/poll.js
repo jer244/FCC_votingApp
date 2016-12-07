@@ -51,10 +51,10 @@ router.get('/create', function(req, res, next) {
     });
 });
 
-router.get('/tweet', function(req, res, next){
-    var myUrl = 'https://twitter.com/intent/tweet?text=Take%20my%20new%20poll%20at%20a' + req.protocol + '://' + req.get('host') + req.originalUrl;
-    //window.open(myUrl, 'twitter');
-    console.log(myUrl);
+router.get('/tweet', function(req, res, next) {
+    var myUrl = 'https://twitter.com/intent/tweet?text=Take%20my%20new%20poll%20at%20' + req.protocol + '://' + req.get('host') + req.originalUrl;
+    var open = require('open');
+    open(myUrl);
 
     var polls = Poll.find(function(err, docs) {
         res.render('./poll/managePolls', {

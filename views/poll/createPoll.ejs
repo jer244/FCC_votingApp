@@ -1,11 +1,11 @@
 <html>
 
 <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <% include ../partials/head.ejs %>
 </head>
 
 <body>
+  <div class='content'>
     <% include ../partials/navbar.ejs %>
         <div style='text-align: center'>
             <h1 style='margin: auto; margin-top: 10%'>Create Poll</h1>
@@ -14,14 +14,26 @@
                 <p><%= alert %></p>
                 <% } %>
                 <div id='createPollForm'>
-                  <form action='/poll/create' method = 'post'>
-                    <input type='hidden' name='_csrf' value='<%=csrfToken%>'/>
-                    <input type='text' id='pollTitle' name='pollTitle' placeholder='Poll Question'/>
-                    <input type='text' id='pollOptions' name='pollOptions' placeholder='seperate by ;'/>
-                    <input type='submit' value='Create Poll'/>
+                  <form action='/poll/create' method = 'post' class='form-horizontal'>
+                    <input class='form-control' type='hidden' name='_csrf' value='<%=csrfToken%>'/>
+                    <div class='form-group'>
+                    <label class='control-label col-sm-2' for='pollTitle'>Question:</label>
+                      <div class='col-sm-9'>
+                      <input class='form-control' type='text' id='pollTitle' name='pollTitle' placeholder='Enter Question'/>
+                      </div>
+                      </div>
+                      <div class='form-group'>
+                    <label class='control-label col-sm-2' for='pollOptions'>List of Answers:</label>
+                    <div class='col-sm-9'>
+                    <input class='form-control' type='text' id='pollOptions' name='pollOptions' placeholder='seperate answers with ;'/>
+                    </div>
+                    </div>
+                    <button class='btn btn-default' type='submit'>Create Poll</button>
                   </form>
                 </div>
               <% } %>
+            </div>
+          </div>
               <% include ../partials/footer.ejs %>
 </body>
 

@@ -1,4 +1,5 @@
-//TODO:need to fix footer, style forms
+//TODO: need to fix footer, style forms
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -17,7 +18,6 @@ require('dotenv').config();  //comment out for production
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
 var pollRoutes = require('./routes/poll');
-
 
 var app = express();
 

@@ -3,23 +3,29 @@
   <head>
     <script src="https://use.fontawesome.com/f2d227ff87.js"></script>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <% include ../partials/head.ejs %>
   </head>
   <body>
+    <div class='content'>
     <% include ../partials/navbar.ejs %>
     <img src='/images/pollME.png' class='titleImage'>
     <p class='tagline'>Polls owned by <%= user %></p>
-        <% for(var i=0; i<polls.length; i++) {
-          if(polls[i].creatorID == user){%>
+    <% var owner = false;
+    for(var i=0; i<polls.length; i++) {
+          if(polls[i].creatorID == user){
+            owner = true;%>
             <ul class='managePollList'>
               <li class='managePollListItem'><a href='../poll?id=<%= polls[i]._id%>'><%= polls[i].pollTitle %></a></li>
               <li class='deletePollButton'><a href='../poll/delete?id=<%= polls[i]._id%>'><i class='fa fa-trash'></i></a></li>
               <li class='tweetPollButton'><a href='../poll/tweet%>'><i class='fa fa-twitter'></i></a></li>
             </ul>
         <% };
-      }; %>
+      };
+      if(!owner){%>
+        <p>No polls owned by this user</p>
+        <% } %>
     <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+  </div>
     <% include ../partials/footer.ejs %>
   </body>
 </html>

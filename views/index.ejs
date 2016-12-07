@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% include ./partials/head.ejs %>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   </head>
   <body>
+    <div class='content'>
     <% include ./partials/navbar.ejs %>
     <img src='/images/pollME.png' class='titleImage'>
     <p class='tagline'>Welcome to <%= title %>!</p>
     <% if (login) {%>
         <div class='createPollButton'><a href='poll/create'>Create New Poll</a></div>
     <% }else{ %>
-      <br><p>Sign in to create your own polls!</p><br>
+      <br><p><a href='/user/logIn'>Sign in</a> to create your own polls!</p><br>
       <% } %>
 
     <br><p>Cast your vote in the following polls:</p>
       <ul class='pollList'>
-        <% for(var i=0; i<polls.length; i++) {%>
+        <% var count = 0;
+          for(var i=0; i<polls.length; i++) {%>
         	<li class='pollListItem'><a href='poll?id=<%= polls[i]._id%>'><%= polls[i].pollTitle %></a></li>
+
         <% } %>
       </ul>
-      <% include ./partials/footer.ejs %>
+    <% include ./partials/footer.ejs %>
+  </div>
     <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
   </body>
 </html>
