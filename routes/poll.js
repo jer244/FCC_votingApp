@@ -11,7 +11,7 @@ var csrfProtection = csrf({
 
 router.use(csrfProtection);
 
-router.get('/vote', function(req, res, next) {
+router.get('/vote', hasNotVoted, function(req, res, next) {
     if (req.query.id && req.query.entry) {
         Poll.findById(req.query.id, function(err, poll) {
             for (var i = 0; i < poll.pollOptions.length; i++) {
@@ -19,9 +19,9 @@ router.get('/vote', function(req, res, next) {
                     poll.pollOptions[i].votes += 1;
                     if (req.isAuthenticated()) {
                         poll.userID.push(req.user.username);
-                    }
-                    //TODO: need to add ability to track unsigned in users
-                    //also need to check if either voted before allowing to vote
+                    } else {
+                        poll.userID.push(req.ip);
+                    };
                     poll.save(function(err, updatedPoll) {
                         if (err) throw err;
                         res.redirect('/poll?id=' + req.query.id);
@@ -37,7 +37,7 @@ router.get('/vote', function(req, res, next) {
 router.get('/managePolls', function(req, res, next) {
     var polls = Poll.find(function(err, docs) {
         res.render('./poll/managePolls', {
-            title: 'Poll-O-Rama',
+            title: 'pollME',
             polls: docs,
             user: req.user.username
         });
@@ -50,6 +50,20 @@ router.get('/create', function(req, res, next) {
         alert: null
     });
 });
+
+router.get('/tweet', function(req, res, next){
+    var myUrl = 'https://twitter.com/intent/tweet?text=Take%20my%20new%20poll%20at%20a' + req.protocol + '://' + req.get('host') + req.originalUrl;
+    //window.open(myUrl, 'twitter');
+    console.log(myUrl);
+
+    var polls = Poll.find(function(err, docs) {
+        res.render('./poll/managePolls', {
+            title: 'pollME',
+            polls: docs,
+            user: req.user.username
+        });
+    });
+})
 
 
 router.post('/create', function(req, res, next) {
@@ -85,13 +99,14 @@ router.post('/create', function(req, res, next) {
     };
 });
 
-router.post('/vote', function(req, res, next) {
+router.post('/vote', isLoggedIn, hasNotVoted, function(req, res, next) {
     if (req.body.writeIn) {
         Poll.findById(req.body.id, function(err, poll) {
             poll.pollOptions.push({
                 optionTitle: req.body.writeIn,
                 votes: 1
             });
+            poll.userID.push(req.user.username);
             poll.save(function(err, updatedPoll) {
                 if (err) throw err;
                 res.redirect('/poll?id=' + req.body.id);
@@ -114,7 +129,7 @@ router.get('/delete', function(req, res, next) {
                     } else {
                         var polls = Poll.find(function(err, docs) {
                             res.render('./poll/managePolls', {
-                                title: 'Poll-O-Rama',
+                                title: 'pollME',
                                 polls: docs,
                                 user: req.user.username
                             });
@@ -133,6 +148,7 @@ router.get('/', function(req, res, next) {
     if (req.query.id) {
         Poll.findById(req.query.id, function(err, poll) {
             res.render('./poll/viewPoll', {
+                alert: null,
                 poll: poll,
                 csrfToken: req.csrfToken()
             });
@@ -144,6 +160,42 @@ router.get('/', function(req, res, next) {
 
 
 module.exports = router;
+
+function hasNotVoted(req, res, next) {
+    var id;
+    var found = false;
+
+    if (req.body.id) {
+        id = req.body.id;
+    } else {
+        id = req.query.id;
+    }
+
+    Poll.findById(id, function(err, poll) {
+        poll.userID.forEach(function(val) {
+            if (req.user) {
+                console.log(req.user.username);
+                if (val == req.user.username) {
+                    found = true;
+                }
+            } else {
+                console.log(req.ip);
+                if (val == req.ip) {
+                    found = true;
+                };
+            };
+        });
+        if (!found) {
+            return next();
+        } else {
+            res.render('./poll/viewPoll', {
+                alert: 'Please vote only once per poll',
+                poll: poll,
+                csrfToken: req.csrfToken()
+            });
+        }
+    });
+};
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {

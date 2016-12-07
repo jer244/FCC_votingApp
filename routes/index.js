@@ -8,7 +8,7 @@ var Poll = require('../models/poll');
 router.get('/', function(req, res, next) {
   var polls = Poll.find(function(err, docs){
     //console.log(docs);
-    res.render('index', { title: 'Poll-O-Rama', polls: docs});
+    res.render('index', { title: 'pollME', polls: docs});
   });
 });
 

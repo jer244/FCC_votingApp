@@ -1,8 +1,10 @@
-/* TODO: update CSS
-          create image for logo (use gimp to create 3d logo)
-          add orange highlights - bottom border of navbar, etc
-          fix spacing for list on managePollList
-*/
+
+html, body{
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
 
 ul {
   list-style-type: none;
@@ -12,15 +14,51 @@ ul {
   background-color: #333;
 }
 
+p{
+    margin:auto;
+    text-align: center;
+}
+
+.titleImage{
+  display: block;
+  width: 30%;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.navBarLogo {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    padding-top: 6px;
+}
+
+.navBarUl{
+  height: 3.5em;
+  margin: 0;
+  border-bottom: 2px solid #cc5100;
+}
+
+.navBarButton{
+    height: 100%;
+}
+
+.navBarText a{
+  padding-top:15px
+}
+
+
 .createPollButton a{
-  width: 40%;
+  width: 20%;
   display: block;
   margin: auto;
   margin-bottom: 2em;
+  margin-top: 2em;
   color: white;
-  background-color: #333;
+  background-color: #cc5100;
   text-align: center;
   padding: 14px 16px;
+  border-radius: 5px;
   text-decoration: none;
 }
 
@@ -32,6 +70,15 @@ ul.pollList {
   margin: auto;
   padding:3px;
   text-align: center;
+}
+
+.navBarButton a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  width: 90px;
+  height: 100%;
 }
 
 
@@ -54,6 +101,8 @@ li.managePollListItem a{
   width: 70%;
   margin: 3px;
   padding: 0.5em;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
 li.deletePollButton a{
@@ -65,6 +114,8 @@ li.deletePollButton a{
   width: 5%;
   margin: 3px;
   padding: 0.5em;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
 li.tweetPollButton a{
@@ -76,24 +127,19 @@ li.tweetPollButton a{
   width: 5%;
   margin: 3px;
   padding: 0.5em;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
 
 li.floatRight {
   float: right;
+  margin-right: 5px;
 }
 
 li.floatLeft{
   float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  width: 80px;
+  margin-left: 5px;
 }
 
 li.pollListItem a{
@@ -104,12 +150,18 @@ li.pollListItem a{
   width: 90%;
   margin: 3px;
   padding: 0.5em;
+  border-radius: 5px;
+  height:auto;
+  text-decoration: none;
 }
 
 li a:hover, a:hover {
   background-color: #111;
 }
 
+.createPollButton a:hover {
+  background-color: #A34100;
+}
 
 .title{
   font-size: 400%;
@@ -119,6 +171,22 @@ li a:hover, a:hover {
 
 .tagline{
   font-size: 200%;
+  font-weight: bold;
   color: #333;
   text-align: center;
+  margin-top: 0.5em;
+}
+
+footer{
+  color:#cc5100;
+  text-align: center;
+  background-color: #333;
+  width: 100%;
+  margin: 0;
+  padding: 3px;
+  height:auto;
+  text-decoration: none;
+  border-top: 2px solid #cc5100;
+  position: fixed;
+  bottom: 0;
 }

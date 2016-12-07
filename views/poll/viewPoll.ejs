@@ -2,6 +2,7 @@
 
 <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages': ['corechart']});
@@ -19,14 +20,13 @@
             dataArray.push(['<%=element.optionTitle%>', <%=element.votes%>]);
             <%});%>
 
-            console.log(dataArray);
-
             var data = google.visualization.arrayToDataTable(dataArray);
 
             var options = {
                 //title: none,
                 colors: ['#ffc199', '#ffa366', '#ff8432', '#ff6600', '#cc5100', '#993d00', '#662800', '#331400'],
-                is3D: false
+                is3D: false,
+                legend: {position: 'right'}
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -42,11 +42,14 @@
 <body>
     <% include ../partials/navbar.ejs %>
         <div style='text-align: center'>
+          <% if (alert){%>
+            <p><%= alert %></p>
+            <% } %>
             <h1 style='margin: auto; margin-top: 10%'><%= poll.pollTitle %></h1>
             <div id="piechart" style="width: 60%; height: 60%; margin: auto"></div>
             <ul class='pollList'>
               <% for(var i=0; i<poll.pollOptions.length; i++) {%>
-                  <li class='pollListItem'><a href='poll/vote?id=<%= poll._id%>&entry=<%= poll.pollOptions[i].optionTitle %>'><%= poll.pollOptions[i].optionTitle %></a></li>
+                  <li class='pollListItem'><a href='/poll/vote?id=<%= poll._id%>&entry=<%= poll.pollOptions[i].optionTitle %>'><%= poll.pollOptions[i].optionTitle %></a></li>
               <% } %>
               <% if (login) {%>
                 <div id='writeInForm'>
@@ -61,7 +64,7 @@
             </ul>
 
         </div>
-
+        <% include ../partials/footer.ejs %>
 </body>
 
 </html>

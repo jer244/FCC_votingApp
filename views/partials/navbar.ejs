@@ -1,10 +1,10 @@
-<ul>
-  <li class = 'floatLeft'><a href='/'>Home</a></li>
+<ul class='navBarUl'>
+  <li class = 'floatLeft navBarButton'><a href='/'><img src='/images/pollME_white.png' class='navBarLogo'></a></li>
     <% if (!login) {%>
-      <li class = 'floatRight'><a href='/user/logIn'>Log In</a></li>
-      <li class = 'floatRight'><a href='/user/signup'>Sign Up</a></li>
+      <li class = 'floatRight navBarButton navBarText'><a href='/user/logIn'>Log In</a></li>
+      <li class = 'floatRight navBarButton navBarText'><a href='/user/signup'>Sign Up</a></li>
     <% } else { %>
-      <li class = 'floatRight'><a href='/user/logout'>Log Out</a></li>
-      <li class = 'floatRight'><a href='/poll/managePolls'>Manage Polls</a></li>
+      <li class = 'floatRight navBarButton navBarText'><a href='/user/logout'>Log Out</a></li>
+      <li class = 'floatRight navBarButton navBarText'><a href='/poll/managePolls'>My Polls</a></li>
     <% } %>
 </ul>

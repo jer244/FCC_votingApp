@@ -3,21 +3,25 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   </head>
   <body>
-    <!--TODO: create way to create new poll-->
     <% include ./partials/navbar.ejs %>
-    <h1 class='title'><%= title %></h1>
-    <p class='tagline'>Welcome to <%= title %></p>
+    <img src='/images/pollME.png' class='titleImage'>
+    <p class='tagline'>Welcome to <%= title %>!</p>
     <% if (login) {%>
-      <div class='createPollButton'><a href='poll/create'>Create Poll</a></div>
-    <% } %>
+        <div class='createPollButton'><a href='poll/create'>Create New Poll</a></div>
+    <% }else{ %>
+      <br><p>Sign in to create your own polls!</p><br>
+      <% } %>
 
+    <br><p>Cast your vote in the following polls:</p>
       <ul class='pollList'>
         <% for(var i=0; i<polls.length; i++) {%>
         	<li class='pollListItem'><a href='poll?id=<%= polls[i]._id%>'><%= polls[i].pollTitle %></a></li>
         <% } %>
       </ul>
+      <% include ./partials/footer.ejs %>
     <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
   </body>
 </html>

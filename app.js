@@ -1,4 +1,4 @@
-
+//TODO:need to fix footer, style forms
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,14 +6,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var session = require('express-session');  //look into using jwt instead to avoid the memory leak
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 
 require('dotenv').config();  //comment out for production
-
-
 
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
@@ -22,19 +21,9 @@ var pollRoutes = require('./routes/poll');
 
 var app = express();
 
-var sess = {
-  secret: 'secretShit',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {}
-}
-
-if(app.get('env') === 'production'){
-  app.set('trust proxy', 1),
-  sess.cookie.secure = 'auto';
-}
 
 mongoose.connect('mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST);
+mongoose.Promise = global.Promise;
 require('./config/passport');
 
 // view engine setup
@@ -47,8 +36,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(validator());
 app.use(cookieParser());
-app.use(session({secret: 'secretshit', resave: false, saveUninitialized: false}));
-app.use(session(sess));
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  saveUninitialized: false,
+  resave: false,
+  store: new MongoStore({mongooseConnection: mongoose.connection})
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
