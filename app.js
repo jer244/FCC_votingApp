@@ -1,4 +1,3 @@
-//TODO: need to fix footer, style forms
 
 var express = require('express');
 var path = require('path');
@@ -13,7 +12,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 
-require('dotenv').config();  //comment out for production
+//require('dotenv').config();  //comment out for production
 
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
@@ -86,6 +85,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 app.set( 'port', ( process.env.PORT || 3000 ));
 // Start node server
