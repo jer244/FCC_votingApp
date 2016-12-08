@@ -11,14 +11,4 @@ var pollSchema = new Schema ({
   }]
 });
 
-/*
-pollSchema.methods.getPolls = function(){
-  return
-};
-
-pollSchema.methods. = function(){
-  return
-};
-
-*/
 module.exports = mongoose.model('Poll', pollSchema);

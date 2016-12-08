@@ -1,6 +1,6 @@
 var Poll = require('../models/poll');
 
-require('dotenv').config();  //comment out for production
+//require('dotenv').config();  //comment out for production
 
 var mongoose = require('mongoose');
 
